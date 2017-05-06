@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src='Downloads/JS/sql.js'></script>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'data/mydb', true);
+xhr.responseType = 'arraybuffer';
+
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response);
+  var db = new SQL.Database(uInt8Array);
+  var contents = db.exec("SELECT * FROM users");
+  // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
+var ooop = 'Huuuhahaaaaaaaaaaaaa';
+document.getElementById('kolumny').innerHTML = contents[0].columns;
+document.getElementById('dane').innerHTML = contents[0].values;
+};
+xhr.send();
+</script>
+</head>
+<body>
+	<div>Wyniki z Bazy danych:</div>
+	<div id="kolumny"></div>
+	<div id="dane"></div>
+</body>
+</html>
